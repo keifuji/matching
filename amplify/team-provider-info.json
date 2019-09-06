@@ -9,6 +9,11 @@
             "UnauthRoleName": "matching-dev-20190906202711-unauthRole",
             "StackName": "matching-dev-20190906202711",
             "StackId": "arn:aws:cloudformation:ap-northeast-1:284414666465:stack/matching-dev-20190906202711/44c16710-d099-11e9-9a47-0e89097244e0"
+        },
+        "categories": {
+            "auth": {
+                "matchinga0e80ed0": {}
+            }
         }
     }
 }

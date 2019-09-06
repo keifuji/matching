@@ -1,6 +1,14 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import Amplify from 'aws-amplify'
+import { withAuthenticator } from 'aws-amplify-react'
+import awsconfig from './aws-exports'
+
+/**
+ * AWS Amplify
+ */
+Amplify.configure(awsconfig)
 
 const Component = ({
   title,
@@ -30,4 +38,4 @@ const App: React.FC = () => {
   );
 }
 
-export default App;
+export default withAuthenticator(App, true)
