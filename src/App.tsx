@@ -8,6 +8,8 @@ import awsconfig from './aws-exports'
 //import withCognitoCredentials from './auth/hocs/withCognitoCredentials'
 import withCognitoUserIfno from './auth/hocs/withCognitoUserInfo'
 import ObjectViewer from './lib/components/ObjectViewer'
+import Todos from './pages/todos'
+
 
 /**
  * AWS Amplify
@@ -54,17 +56,15 @@ const App: React.FC = () => {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Component title="タイトル">
-          テスト1
-        </Component>
+
+        <div>
+          <Todos />
+        </div>
+
         <WrappedComponent title="Credentials">
           テスト2
         </WrappedComponent>
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <p>テスト...</p>
-      <div>Emmet Abbreviation</div>
+
       </header>
     </div>
   );
