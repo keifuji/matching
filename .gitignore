@@ -34,5 +34,5 @@ amplify/backend/awscloudformation
 build/
 dist/
 node_modules/
-aws-exports.js
+#aws-exports.js #これがあるとgitに載らないのでリモートでbuildできない
 awsconfiguration.json
