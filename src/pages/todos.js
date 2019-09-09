@@ -4,6 +4,7 @@ import { API, graphqlOperation } from 'aws-amplify'
 import { createTodo } from '../graphql/mutations'
 import { listTodos } from '../graphql/queries'
 import withCognitoUserInfo from '../auth/hocs/withCognitoUserInfo'
+import TodoList from './TodoList'
 
 
 const Input = ({
@@ -78,6 +79,9 @@ const withAddTodo = withStateHandlers({ currentTodo: {} }, {
             if(newTodo) {
                 console.log(newTodo)
                 alert('Success')
+                return {
+                    currentTodo: {} // asyncだから効かないので、一つ上の階層にする必要がある
+                }
             }
         } catch(err) {
             console.error(err)
@@ -110,6 +114,9 @@ const Todos = ({
             <h3>Todo Form</h3>
             <p>username: {username}</p>
             <TodoForm userId={username} />
+            <div>
+                <TodoList />
+            </div>
             <h3>Todos</h3>
             <button onClick={getTodos}>Get</button>
             {todos.map(({ id, userId, name, description}) => (
