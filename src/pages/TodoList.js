@@ -8,16 +8,19 @@ const TodoList = ({
 }) => {
     return (
         <div>
-            <h4>Todo List</h4>
-            {todos.map(({ id, userId, name, description}) => (
-                <div key={id}>
-                    <strong title={id}>{userId}</strong>
-                    <span>: </span>
-                    <span>{name}</span>
-                    <span>: </span>
-                    <span>{description}</span>
-                </div>
-            ))}
+            <h4>TodoList (subscribe)</h4>
+            {Object.keys( todos ).map(key => { 
+                const { id, userId, name, description } = todos[key] || {}
+                return (
+                    <div key={id}>
+                        <strong title={id}>{userId}</strong>
+                        <span>: </span>
+                        <span>{name}</span>
+                        <span>: </span>
+                        <span>{description}</span>
+                    </div>
+                )
+            })}
         </div>
     )
 }
@@ -25,16 +28,16 @@ const TodoList = ({
 
 const withSubscriptionState = withStateHandlers({
     subscription: null,
-    todos: [],
+    todos: {},
 }, {
     setSbuscription: () => subscription => ({
         subscription
     }),
     setTodo: ({todos}) => (todo) => ({ 
-        todos: [ 
+        todos: { 
             ...todos,
-            todo,
-        ]
+            [todo.id]: todo,
+        }
     }),
 })
 

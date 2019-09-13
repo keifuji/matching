@@ -32,7 +32,6 @@ const Component: React.ComponentType<Props> = ({
   credentials,
   userInfo,
 }: Props) => {
-  console.log('userInfo', userInfo)
   const { username, attributes } = userInfo || {}
   return (
     <div>
@@ -48,7 +47,6 @@ const Component: React.ComponentType<Props> = ({
   )
 }
 
-//const WrappedComponent: React.ComponentType<Props> = withCognitoCredentials(Component)
 const WrappedComponent: React.ComponentType<Props> = withCognitoUserIfno(Component)
 
 const App: React.FC = () => {
