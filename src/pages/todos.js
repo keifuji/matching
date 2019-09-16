@@ -1,9 +1,10 @@
 import React from 'react'
 import { compose } from 'recompose'
 import withCognitoUserInfo from '../auth/hocs/withCognitoUserInfo'
-import TodoList from './TodoList'
-import ConnectTodos from './ConnectTodos'
-import TodoForm from './components/TodoForm'
+//import ConnectTodos from './ConnectTodos'
+//import TodoForm from './components/TodoForm'
+import SyncTodoList from './components/SyncTodoList'
+//import { SyncRoot } from '../appsync/initialize'
 
 const Todos = ({
     todos,
@@ -15,14 +16,19 @@ const Todos = ({
 
     return (
         <div>
-            <h3>Todo Form</h3>
-            <p>username: {username}</p>
-            <TodoForm userId={username} />
-            <div>
-                <TodoList />
+            <div style={{border: 'solid 1px grey'}}>
+                <SyncTodoList />
             </div>
+            <p>username: {username}</p>
+            {/*
+            <div style={{border: 'solid 1px grey'}}>
+                <SyncRoot />
+            </div>
+            <h3>Todo Form</h3>
+            <TodoForm userId={username} />
             <h3>ConnectTodos</h3>
             <ConnectTodos />
+            */}
         </div>
     )
 }

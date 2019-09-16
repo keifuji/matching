@@ -1,6 +1,8 @@
 import React from 'react'
 import { compose, withStateHandlers } from 'recompose'
-import withTodoMutations from '../hocs/withTodoMutations'
+//import withTodoMutations from '../hocs/withTodoMutations'
+import { withCreateTodo } from '../hocs/withTodoMutations'
+import withCognitoUserInfo from '../../auth/hocs/withCognitoUserInfo'
 
 
 const Input = ({
@@ -65,10 +67,24 @@ const Form = ({
 }
 
 const withAddTodo = withStateHandlers({ currentTodo: {} }, {
-    onSubmit: ({currentTodo}, {addTodo}) => async (e) => {
+    onSubmit: ({currentTodo}, {createTodo, userInfo }) => async (e) => {
         e.preventDefault()
-        const newTodo = await addTodo(currentTodo)
-        console.log('newTodo', newTodo)
+        try {
+            const { username } = userInfo || {}
+            if(!username) {
+                alert('ユーザーがログインしていません')
+                return
+            }
+            const input = {
+                userId: username,
+                ...currentTodo,
+            }
+            console.log('onSubmit', { input } )
+            const newTodo = await createTodo({ input })
+            console.log('newTodo', input)
+        } catch(err) {
+            console.warn('onSubmit error', err)
+        }
         return { currentTodo: {} }
     },
     onChange: ({currentTodo}) => (key, value) => ({ 
@@ -84,7 +100,9 @@ const withAddTodo = withStateHandlers({ currentTodo: {} }, {
 })
 
 const formWrapper = compose(
-    withTodoMutations,
+    //withTodoMutations,
+    withCognitoUserInfo,
+    withCreateTodo,
     withAddTodo,
 )
 

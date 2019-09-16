@@ -1,8 +1,11 @@
-import { withHandlers } from 'recompose'
-import { API, graphqlOperation } from 'aws-amplify'
+import gql from 'graphql-tag'
+import { graphqlMutation } from 'aws-appsync-react'
+//import { withHandlers } from 'recompose'
+//import { API, graphqlOperation } from 'aws-amplify'
 import * as mutations from '../../graphql/mutations'
+import { listTodos } from '../../graphql/queries'
 
-
+/*
 const withTodoMutations = withHandlers({
     deleteTodo: () => async (id) => {
         const options = {
@@ -32,5 +35,23 @@ const withTodoMutations = withHandlers({
         }
     },
 })
+//export default withTodoMutations
+*/
 
-export default withTodoMutations
+export const withDeleteTodo = graphqlMutation(
+    gql(mutations.deleteTodo),
+    { query: gql(listTodos) },
+    'Todo',
+    'id',
+    'remove',
+)
+
+export const withCreateTodo = graphqlMutation(
+    gql(mutations.createTodo),
+    { query: gql(listTodos) },
+    'Todo',
+    'id',
+    'add',
+)
+
+
